@@ -46,6 +46,7 @@ void loop() {
     }
   }
   xbee.send(tx);
+  delay(100);
 
   //recieve pump status and trigger pump
   xbee.readPacket();
@@ -69,12 +70,13 @@ void loop() {
     } else if (xbee.getResponse().getApiId() == MODEM_STATUS_RESPONSE) {
       xbee.getResponse().getModemStatusResponse(msr);
     } else {
-      // not something we were expecting   
+      // not something we were expecting  
+      //Serial.println("Error Occured"); 
     }
   }
   else if (xbee.getResponse().isError()) {
-    //nss.print("Error reading packet.  Error code: ");  
-    //nss.println(xbee.getResponse().getErrorCode());
+    //Serial.print("error code:");
+    //Serial.println(xbee.getResponse().getErrorCode());
   }
-  delay(2000);
+  delay(1500);
 }
