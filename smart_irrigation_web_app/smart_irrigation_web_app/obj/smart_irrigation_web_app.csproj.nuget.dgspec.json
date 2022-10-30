@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\avishek\\Documents\\smart_irrigation_web_app\\smart_irrigation_web_app\\smart_irrigation_web_app.csproj": {}
+    "C:\\Users\\avishek\\Documents\\GitHub\\smart-irrigation-system\\smart_irrigation_web_app\\smart_irrigation_web_app\\smart_irrigation_web_app.csproj": {}
   },
   "projects": {
-    "C:\\Users\\avishek\\Documents\\smart_irrigation_web_app\\smart_irrigation_web_app\\smart_irrigation_web_app.csproj": {
+    "C:\\Users\\avishek\\Documents\\GitHub\\smart-irrigation-system\\smart_irrigation_web_app\\smart_irrigation_web_app\\smart_irrigation_web_app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\avishek\\Documents\\smart_irrigation_web_app\\smart_irrigation_web_app\\smart_irrigation_web_app.csproj",
+        "projectUniqueName": "C:\\Users\\avishek\\Documents\\GitHub\\smart-irrigation-system\\smart_irrigation_web_app\\smart_irrigation_web_app\\smart_irrigation_web_app.csproj",
         "projectName": "smart_irrigation_web_app",
-        "projectPath": "C:\\Users\\avishek\\Documents\\smart_irrigation_web_app\\smart_irrigation_web_app\\smart_irrigation_web_app.csproj",
+        "projectPath": "C:\\Users\\avishek\\Documents\\GitHub\\smart-irrigation-system\\smart_irrigation_web_app\\smart_irrigation_web_app\\smart_irrigation_web_app.csproj",
         "packagesPath": "C:\\Users\\avishek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\avishek\\Documents\\smart_irrigation_web_app\\smart_irrigation_web_app\\obj\\",
+        "outputPath": "C:\\Users\\avishek\\Documents\\GitHub\\smart-irrigation-system\\smart_irrigation_web_app\\smart_irrigation_web_app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\avishek\\AppData\\Roaming\\NuGet\\NuGet.Config",

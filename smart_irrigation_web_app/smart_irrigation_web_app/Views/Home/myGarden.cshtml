@@ -5,32 +5,90 @@
 
 <h1>My Garden</h1>
 <h5>Garden Moisture Level</h5>
-<div class="progress">
-  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col col-sm-12">
+			<div class="progress">
+				<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+			</div>
+		</div>
+    </div>
+    <div class="row">
+        <div class="col col-sm-6">
+            <button class="btn btn-primary" id="btntester">tester</button>
+        </div>
+        <div class="col col-sm-6"></div>
+    </div>
 </div>
 
+
 <script type="text/javascript">
-        //Author : Avishek Ram Copyright 20222
+        //Author : Avishek Ram Copyright 2022
         
         (function mymain(){
             $(document).ready(function() {
-                $('#college_select').select2(
-                {
-                    dropdownParent: $('#college_select').parent(),
-                    allowClear: true, 
-                    placeholder:"Select a College",
-                    allowClear: true,
-                    width:"55%"
-                });
+                //$('#college_select').select2(
+                //{
+                //    dropdownParent: $('#college_select').parent(),
+                //    allowClear: true, 
+                //    placeholder:"Select a College",
+                //    allowClear: true,
+                //    width:"55%"
+                //});
 
-                $("#college_select").val("")
-                $("#college_select").trigger("change");
+                //$("#college_select").val("")
+                //$("#college_select").trigger("change");
 
             });
         })();
         
-        $("#college_select").on('change', function(){
+        $("#btntester").on('click', function(){
+            $.ajax({
+                url: "sendMoisture",
+                type:"POST",
+                //data: formData,
+                success: function (response) {
+                    alert(response);
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
 
+            });
+            //var api_url = "http://localhost:7049/api/SmartIrrigation/sendMoisture"
+            //$.ajax({
+            //        url: api_url,
+            //        dataType: "text",
+            //        type: "POST",
+            //        //data: {survey_model : JSON.stringify(survey_data)},
+            //        success: function(response){
+            //            //console.log(response);
+            //            swal({
+            //                title: "Success!",
+            //                text: JSON.parse(response),
+            //                icon: "success",
+            //            }).then((confirm)=>
+            //            {
+            //                if(confirm){
+            //                    location.href = 'http://172.31.53.37/testmoodle/moodle/my';
+            //                }
+            //            });
+            //        },
+            //        error: function(response){
+            //            //console.log(response);
+            //                swal({
+            //                    title: "Error Occured!",
+            //                    text: "Error Occured while Submission",
+            //                    icon: "warning",
+            //                    buttons: true
+            //            }).then((confirm)=>
+            //            {
+            //                if(confirm){
+            //                    location.href = 'http://172.31.53.37/testmoodle/moodle/my';
+            //                }
+            //            });
+            //        }
+            //});
             
         });
 
@@ -56,40 +114,4 @@
                     return "unknown"
             }
         }
-
-         var api_url = "http://172.31.53.37/testmoodle/moodle/local/termsurvey/survey_api.php"
-            $.ajax({
-                    url: api_url,
-                    dataType: "text",
-                    type: "POST",
-                    data: {survey_model : JSON.stringify(survey_data)},
-                    success: function(response){
-                        //console.log(response);
-                        swal({
-                            title: "Success!",
-                            text: JSON.parse(response),
-                            icon: "success",
-                        }).then((confirm)=>
-                        {
-                            if(confirm){
-                                location.href = 'http://172.31.53.37/testmoodle/moodle/my';
-                            }
-                        });
-                    },
-                    error: function(response){
-                        //console.log(response);
-                            swal({
-                                title: "Error Occured!",
-                                text: "Error Occured while Submission",
-                                icon: "warning",
-                                buttons: true
-                        }).then((confirm)=>
-                        {
-                            if(confirm){
-                                location.href = 'http://172.31.53.37/testmoodle/moodle/my';
-                            }
-                        });
-                    }
-            });
-
   </script>

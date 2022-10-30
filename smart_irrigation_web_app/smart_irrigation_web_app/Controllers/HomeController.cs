@@ -2,6 +2,8 @@
 using smart_irrigation_web_app.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
+using System.Web;
+using smart_irrigation_web_app.Data;
 
 namespace smart_irrigation_web_app.Controllers
 {
@@ -30,6 +32,52 @@ namespace smart_irrigation_web_app.Controllers
             return View();
         }
 
+        [HttpPost]
+        public JsonResult sendMoisture(MoistureModel model) //Raspberry pi will use this api to send data to server
+        {
+            using (var cont = new smartIrriigationDBContext())
+            {
+                var rec = cont.tbl_gardens.Where(i => i.id == model.gardenid).FirstOrDefault();
+                rec.last_moisture_level = model.moisture;
+
+                if (model.moisture < rec.prefered_moisture_level)  //trigger pump if below prefered moisture level
+                {
+                    rec.pump_trigger_status = true;
+                }
+                else {
+                    rec.pump_trigger_status = false;
+                }
+
+                cont.Update(rec);
+                cont.SaveChanges();
+            }
+            return new JsonResult(true);
+        }
+
+        [HttpGet]
+        public JsonResult togglePump(PumpModel model)
+        {
+            using (var db = new smartIrriigationDBContext())
+            {
+                var rec = db.tbl_gardens.Where(i => i.id == model.gardenid).FirstOrDefault();
+                //web app can force trigger the pump
+                if (model.forcetogglepump.HasValue)
+                {
+                    rec.pump_trigger_status = (bool)model.forcetogglepump;
+                    db.Update(rec);
+                    db.SaveChanges();
+                }
+
+                //send pre set pump status to rpsberrry pi
+                if ((bool)rec.pump_trigger_status)
+                {
+                    return new JsonResult("onn");
+                }
+                else {
+                    return new JsonResult("off");
+                }
+            }
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
