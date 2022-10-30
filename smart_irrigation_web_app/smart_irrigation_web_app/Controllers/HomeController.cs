@@ -29,7 +29,12 @@ namespace smart_irrigation_web_app.Controllers
         [Authorize]
         public IActionResult myGarden()
         {
-            return View();
+            using (var db = new smartIrriigationDBContext())
+            {
+                var defaultMoisture = db.tbl_gardens.Where(o => o.id == 1).FirstOrDefault();
+                ViewBag.moisture = defaultMoisture.last_moisture_level ?? 0;
+                return View();
+            }
         }
 
         [HttpPost]
@@ -51,7 +56,7 @@ namespace smart_irrigation_web_app.Controllers
                 cont.Update(rec);
                 cont.SaveChanges();
             }
-            return new JsonResult(true);
+            return new JsonResult("Success");
         }
 
         [HttpGet]
@@ -76,6 +81,20 @@ namespace smart_irrigation_web_app.Controllers
                 else {
                     return new JsonResult("off");
                 }
+            }
+        }
+
+        [HttpGet]
+        public JsonResult getGardenMoisture(MoistureModel model) 
+        {
+            using (var db = new smartIrriigationDBContext()) 
+            {
+                var rec = db.tbl_gardens.Where(i => i.id == model.gardenid).FirstOrDefault();
+                if (rec != null) 
+                {
+                    return new JsonResult(rec.last_moisture_level);
+                }
+                return new JsonResult("Error Occured");
             }
         }
 
