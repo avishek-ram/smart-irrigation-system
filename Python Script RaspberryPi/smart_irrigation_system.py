@@ -1,19 +1,30 @@
-from ast import While
 import sys
 import time
 import os
-import ssl
 import json
 import serial
-import struct
 import threading
+import requests
 from digi.xbee.devices import XBeeDevice, RemoteXBeeDevice, XBee64BitAddress
 
 # Define the callback.
 def my_data_received_callback(xbee_message):
     address = xbee_message.remote_device.get_64bit_addr()
     data = xbee_message.data.decode("utf8")
-    print("Received data from %s: %s" % (address, data))
+    datastr = str(data)
+    datastr = datastr.rstrip('\x00')
+    datastr = datastr[6:]
+    if int(datastr) < 0:
+        datastr = "0"
+    elif int(datastr) > 100:
+        datastr = "100"
+
+    #print("Received data from %s: %s" % (address, data))
+    payload = {
+        'moisture' : datastr,
+        'gardenid' : '1',
+    }
+    response = requests.post("https://smartirrigationfiji.com/Home/sendMoisture", params= payload)
 
 # Instantiate a local XBee node.
 xbee = XBeeDevice(port = "/dev/ttyUSB0", baud_rate=9600)
@@ -35,14 +46,16 @@ def get_mydata():
     #close the device
     if xbee is not None and xbee.is_open():
         xbee.close()
-            
         
 def send_my_data():
-    # Send data using the remote object.
-    time.sleep(5)
-    xbee.send_data_async(remote, "onn")
-    time.sleep(6)
-    xbee.send_data_async(remote, "off")
+    # Get data from server Send data using the remote Zigbee.
+    newStatus = None
+    while True :
+        time.sleep(0.8)
+        response = requests.get("https://smartirrigationfiji.com/Home/togglepump", params= {'gardenid' : '1'})
+        if newStatus is not response.text[1:-1]:
+            newStatus = response.text[1:-1]
+            xbee.send_data_async(remote, newStatus)
 
 if __name__ =="__main__":
     # creating thread
