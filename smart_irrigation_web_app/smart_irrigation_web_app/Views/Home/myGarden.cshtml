@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "myGarden";
+}
+
+<h1>My Garden</h1>
+<h5>Garden 1: Soil Moisture Level</h5>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col col-sm-6">
+			<div class="progress">
+				<div class="progress-bar" role="progressbar" style="width: @ViewBag.moisture%;" aria-valuenow="@ViewBag.moisture" aria-valuemin="0" aria-valuemax="100">@ViewBag.moisture%</div>
+			</div>
+		</div>
+    </div>
+    <div class="row">
+        <div class="col col-sm-6">
+            <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
+            <button class=" btn btn-sm btn-warning mt-2" id="btnpumpoff">Turn Pump Off</button>
+        </div>
+        <div class="col col-sm-6"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        //Author : Avishek Ram Copyright 2022
+        
+        (function mymain(){
+            $(document).ready(function() {
+
+                function updateprogressbar() {
+                    var formData = {gardenid:1};
+                    $.ajax({
+                        url: "getGardenMoisture",
+                        type:"GET",
+                        data: formData,
+                        success: function (response) {
+                            //alert(response);
+                            $('.progress-bar').css('width', response + '%').attr('aria-valuenow', response).html(response + '%'); 
+                        },
+                        error: function (request, status, error) {
+                            //alert(request.responseText);
+                            console.log("Eror Occured");
+                        }
+
+                    });
+                }
+                window.setInterval(updateprogressbar, 2000);
+            });
+        })();
+        
+        $("#btnpumpon").on('click', function(){
+            var model = 
+            {
+                gardenid: 1,
+                forcetogglepump: true
+            };
+            $.ajax({
+                url: "togglepump",
+                type:"GET",
+                data: model,
+                success: function (response) {
+                    //alert(response);
+                    console.log("Pump Turned On");
+                },
+                error: function (request, status, error) {
+                   // alert(request.responseText);
+                   console.log("Eror Occured");
+                }
+            });
+        });
+
+        $("#btnpumpoff").on('click', function(){
+            var model = 
+            {
+                gardenid: 1,
+                forcetogglepump: false
+            };
+            $.ajax({
+                url: "togglepump",
+                type:"GET",
+                data: model,
+                success: function (response) {
+                    //alert(response);
+                    console.log("Pump Turned On");
+                },
+                error: function (request, status, error) {
+                   // alert(request.responseText);
+                   console.log("Eror Occured");
+                }
+            });
+        });
+
+  </script>

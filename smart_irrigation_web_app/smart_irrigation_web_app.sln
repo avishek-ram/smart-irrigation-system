@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smart_irrigation_web_app", "smart_irrigation_web_app\smart_irrigation_web_app.csproj", "{BFC195C2-E5CD-497F-A708-B9EC7AB9A1D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFC195C2-E5CD-497F-A708-B9EC7AB9A1D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC195C2-E5CD-497F-A708-B9EC7AB9A1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC195C2-E5CD-497F-A708-B9EC7AB9A1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC195C2-E5CD-497F-A708-B9EC7AB9A1D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A45D85D-922A-44AA-BD61-0645E9096D03}
+	EndGlobalSection
+EndGlobal
