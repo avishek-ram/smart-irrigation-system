@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-smart_irrigation_web_app-95E265F8-1CF7-417F-A5B2-76F43E5574B4</UserSecretsId>
+	<PublishWithAspNetCoreTargetManifest>
+		  false
+	</PublishWithAspNetCoreTargetManifest>
   </PropertyGroup>
 
   <ItemGroup>
