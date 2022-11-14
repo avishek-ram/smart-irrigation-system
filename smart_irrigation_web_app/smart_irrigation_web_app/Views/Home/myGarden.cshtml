@@ -2,29 +2,90 @@
 @{
     ViewData["Title"] = "myGarden";
 }
+<h1 class="text-center">My Garden</h1>
 
-<h1>My Garden</h1>
-<h5>Garden 1: Soil Moisture Level</h5>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col col-sm-6">
-			<div class="progress">
-				<div class="progress-bar" role="progressbar" style="width: @ViewBag.moisture%;" aria-valuenow="@ViewBag.moisture" aria-valuemin="0" aria-valuemax="100">@ViewBag.moisture%</div>
-			</div>
-		</div>
-    </div>
-    <div class="row">
-        <div class="col col-sm-6">
-            <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
-            <button class=" btn btn-sm btn-warning mt-2" id="btnpumpoff">Turn Pump Off</button>
-            <div class="input-group mb-3 mt-2">
-                <input type="text" class="form-control" id="preferedLevelInput" placeholder="Update Preferred Moisture Level" aria-label="Update Preferred Moisture Level" aria-describedby="button-addon2" aria-valuetext="@ViewBag.preferredMoistureLevel">
-                <button class="btn btn-outline-secondary" type="button" id="udpatePreferedMoistureLevel">Update</button>
+<div class="card bg-warning rounded">
+    <h5 class="mt-2 text-center">Garden 1: Soil Moisture Level</h5>
+    <div class="container ml-2">
+        <div class="row">
+            <div class="col col-sm-6 col-md-6 col-lg-11">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: @ViewBag.moisture%;" aria-valuenow="@ViewBag.moisture" aria-valuemin="0" aria-valuemax="100">@ViewBag.moisture%</div>
+                </div>
             </div>
         </div>
-        <div class="col col-sm-6"></div>
+        <div class="row">
+            <div class="col col-sm-6 col-md-6">
+                <div class="justify-center align-items-center">
+                    <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
+                    <button class="btn btn-sm btn-danger mt-2" id="btnpumpoff">Turn Pump Off</button>
+                </div>
+                <div class="input-group mb-3 mt-2">
+                    <input type="text" class="form-control" id="preferedLevelInput" placeholder="Preferred Moisture Level" aria-label="Preferred Moisture Level" aria-describedby="button-addon2" aria-valuetext="@ViewBag.preferredMoistureLevel">
+                    <button class="btn btn-primary type="button" id="udpatePreferedMoistureLevel">Update</button>
+                </div>
+            </div>
+            <div class="col col-sm-6 col-md-6"></div>
+        </div>
     </div>
 </div>
+
+<strong><hr /></strong>
+
+<div class="card bg-warning rounded">
+    <h5 class="mt-2 text-center">Garden 1: Soil Moisture Level</h5>
+    <div class="container ml-2">
+        <div class="row">
+            <div class="col col-sm-6 col-md-6 col-lg-11">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: @ViewBag.moisture%;" aria-valuenow="@ViewBag.moisture" aria-valuemin="0" aria-valuemax="100">@ViewBag.moisture%</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-6 col-md-6">
+                <div class="justify-center align-items-center">
+                    <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
+                    <button class="btn btn-sm btn-danger mt-2" id="btnpumpoff">Turn Pump Off</button>
+                </div>
+                <div class="input-group mb-3 mt-2">
+                    <input type="text" class="form-control" id="preferedLevelInput" placeholder="Preferred Moisture Level" aria-label="Preferred Moisture Level" aria-describedby="button-addon2" aria-valuetext="@ViewBag.preferredMoistureLevel">
+                    <button class="btn btn-primary type="button" id="udpatePreferedMoistureLevel">Update</button>
+                </div>
+            </div>
+            <div class="col col-sm-6 col-md-6"></div>
+        </div>
+    </div>
+</div>
+
+<strong><hr /></strong>
+
+<div class="card bg-warning rounded">
+    <h5 class="mt-2 text-center">Garden 1: Soil Moisture Level</h5>
+    <div class="container ml-2">
+        <div class="row">
+            <div class="col col-sm-6 col-md-6 col-lg-11">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: @ViewBag.moisture%;" aria-valuenow="@ViewBag.moisture" aria-valuemin="0" aria-valuemax="100">@ViewBag.moisture%</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-6 col-md-6">
+                <div class="justify-center align-items-center">
+                    <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
+                    <button class="btn btn-sm btn-danger mt-2" id="btnpumpoff">Turn Pump Off</button>
+                </div>
+                <div class="input-group mb-3 mt-2">
+                    <input type="text" class="form-control" id="preferedLevelInput" placeholder="Preferred Moisture Level" aria-label="Preferred Moisture Level" aria-describedby="button-addon2" aria-valuetext="@ViewBag.preferredMoistureLevel">
+                    <button class="btn btn-primary type="button" id="udpatePreferedMoistureLevel">Update</button>
+                </div>
+            </div>
+            <div class="col col-sm-6 col-md-6"></div>
+        </div>
+    </div>
+</div>
+
 
 
 <script type="text/javascript">
