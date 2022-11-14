@@ -17,6 +17,10 @@
         <div class="col col-sm-6">
             <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
             <button class=" btn btn-sm btn-warning mt-2" id="btnpumpoff">Turn Pump Off</button>
+            <div class="input-group mb-3 mt-2">
+                <input type="text" class="form-control" id="preferedLevelInput" placeholder="Update Preferred Moisture Level" aria-label="Update Preferred Moisture Level" aria-describedby="button-addon2" aria-valuetext="@ViewBag.preferredMoistureLevel">
+                <button class="btn btn-outline-secondary" type="button" id="udpatePreferedMoistureLevel">Update</button>
+            </div>
         </div>
         <div class="col col-sm-6"></div>
     </div>
@@ -90,6 +94,37 @@
                    console.log("Eror Occured");
                 }
             });
+        });
+
+        $("#udpatePreferedMoistureLevel").on('click', function () {
+            var newLevel = $("#preferedLevelInput").val();
+            console.log(newLevel);
+
+            if((newLevel <= 0 || newLevel > 100))
+            {
+                alert("Enter Value between 0 - 100")
+            }else
+            {
+                var model =
+                {
+                    gardenid: 1,
+                    preferredMoistureLevel: newLevel
+                };
+                $.ajax({
+                    url: "updatePreferedMoistureLevel",
+                    type: "PUT",
+                    data: model,
+                    success: function (response) {
+                        //alert(response);
+                        console.log("Updated moisture level");
+                    },
+                    error: function (request, status, error) {
+                        // alert(request.responseText);
+                        console.log("Eror Occured");
+                    }
+                });
+            }
+            
         });
 
   </script>
