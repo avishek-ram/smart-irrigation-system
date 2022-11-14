@@ -45,7 +45,7 @@ namespace smart_irrigation_web_app.Controllers
                 var rec = cont.tbl_gardens.Where(i => i.id == model.gardenid).FirstOrDefault();
                 rec.last_moisture_level = model.moisture;
 
-                if (rec.prefered_moisture_level.HasValue)
+                if (rec.prefered_moisture_level.HasValue && (!rec.force_toggle_pump.HasValue || (rec.force_toggle_pump.HasValue && rec.force_toggle_pump == false)))
                 {
                     if (model.moisture < rec.prefered_moisture_level)  //trigger pump if below prefered moisture level
                     {
@@ -73,6 +73,8 @@ namespace smart_irrigation_web_app.Controllers
                 if (model.forcetogglepump.HasValue)
                 {
                     rec.pump_trigger_status = (bool)model.forcetogglepump;
+                    rec.force_toggle_pump = (bool)model.forcetogglepump;
+
                     db.Update(rec);
                     db.SaveChanges();
                 }
