@@ -104,6 +104,24 @@ namespace smart_irrigation_web_app.Controllers
             }
         }
 
+        [HttpPut]
+        public JsonResult updatePreferedMoistureLevel(MoistureModel model) //Raspberry pi will use this api to send data to server
+        {
+            using (var cont = new smartIrriigationDBContext())
+            {
+                if (model.preferredMoistureLevel < 0 || model.preferredMoistureLevel > 100)
+                {
+                    return new JsonResult("Error Occured");
+                }
+                var rec = cont.tbl_gardens.Where(i => i.id == model.gardenid).FirstOrDefault();
+                rec.prefered_moisture_level = model.preferredMoistureLevel;
+
+                cont.Update(rec);
+                cont.SaveChanges();
+            }
+            return new JsonResult("Success");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
