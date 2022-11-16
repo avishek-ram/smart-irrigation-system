@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bumO/lycDsOBeE2uAI7JCYyLmoQG4whZGOMVU7yfl8s=",
+  "Hash": "vWcD7bqO5HuMw3q8tful3aAputWRwPy71K8CPFJsxlk=",
   "Source": "smart_irrigation_web_app",
   "BasePath": "_content/smart_irrigation_web_app",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\avishek.ram\\Documents\\GitHub\\smart-irrigation-system\\smart_irrigation_web_app\\smart_irrigation_web_app\\wwwroot\\images\\bg.jpg",
+      "SourceId": "smart_irrigation_web_app",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\avishek.ram\\Documents\\GitHub\\smart-irrigation-system\\smart_irrigation_web_app\\smart_irrigation_web_app\\wwwroot\\",
+      "BasePath": "_content/smart_irrigation_web_app",
+      "RelativePath": "images/bg.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\bg.jpg"
     },
     {
       "Identity": "C:\\Users\\avishek.ram\\Documents\\GitHub\\smart-irrigation-system\\smart_irrigation_web_app\\smart_irrigation_web_app\\wwwroot\\js\\site.js",
