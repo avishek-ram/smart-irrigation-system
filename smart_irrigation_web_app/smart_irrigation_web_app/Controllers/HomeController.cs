@@ -104,7 +104,7 @@ namespace smart_irrigation_web_app.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public JsonResult updatePreferedMoistureLevel(MoistureModel model) //Raspberry pi will use this api to send data to server
         {
             using (var cont = new smartIrriigationDBContext())
