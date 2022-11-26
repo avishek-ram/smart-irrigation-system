@@ -32,7 +32,7 @@ namespace smart_irrigation_web_app.Controllers
             using (var db = new smartIrriigationDBContext())
             {
                 var defaultMoisture = db.tbl_gardens.Where(o => o.id == 1).FirstOrDefault();
-                ViewBag.moisture = defaultMoisture.last_moisture_level ?? 0;
+                ViewBag.moisture = defaultMoisture.last_moisture_level;
                 return View();
             }
         }
@@ -45,18 +45,20 @@ namespace smart_irrigation_web_app.Controllers
                 var rec = cont.tbl_gardens.Where(i => i.id == model.gardenid).FirstOrDefault();
                 rec.last_moisture_level = model.moisture;
 
-                if (rec.prefered_moisture_level.HasValue && (!rec.force_toggle_pump.HasValue || (rec.force_toggle_pump.HasValue && rec.force_toggle_pump == false)))
+                if(rec.ManualTrigger != 1)
                 {
-                    if (model.moisture < rec.prefered_moisture_level)  //trigger pump if below prefered moisture level
+                    if (rec.prefered_moisture_level.HasValue && (!rec.force_toggle_pump.HasValue || (rec.force_toggle_pump.HasValue && rec.force_toggle_pump == false)))
                     {
-                        rec.pump_trigger_status = true;
-                    }
-                    else
-                    {
-                        rec.pump_trigger_status = false;
+                        if (model.moisture < rec.prefered_moisture_level)  //trigger pump if below prefered moisture level
+                        {
+                            rec.pump_trigger_status = true;
+                        }
+                        else
+                        {
+                            rec.pump_trigger_status = false;
+                        }
                     }
                 }
-
                 cont.Update(rec);
                 cont.SaveChanges();
             }
@@ -127,5 +129,25 @@ namespace smart_irrigation_web_app.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpPost]
+        public JsonResult postManualTriger(MoistureModel model) //Raspberry pi will use this api to send data to server
+        {
+            if(model.manualTrigger < 0 || model.manualTrigger > 1)
+            {
+                return new JsonResult("Error Occured");
+            }
+
+            using (var cont = new smartIrriigationDBContext())
+            {
+                var rec = cont.tbl_gardens.Where(i => i.id == model.gardenid).FirstOrDefault();
+                rec.ManualTrigger = model.manualTrigger;
+
+                cont.Update(rec);
+                cont.SaveChanges();
+            }
+            return new JsonResult("Success");
+        }
+
     }
 }

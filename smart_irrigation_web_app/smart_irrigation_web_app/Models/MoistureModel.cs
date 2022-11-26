@@ -5,6 +5,7 @@
         public int moisture { get; set; }
         public int gardenid { get; set; }
         public int preferredMoistureLevel { get; set; }
+        public int manualTrigger { get; set; }
     }
 
     public class PumpModel 
@@ -12,5 +13,6 @@
         public int gardenid { get; set; }
         public bool? forcetogglepump { get; set; }
         public int preferredMoistureLevel { get; set; }
+        public int manualTrigger { get; set; }
     }
 }

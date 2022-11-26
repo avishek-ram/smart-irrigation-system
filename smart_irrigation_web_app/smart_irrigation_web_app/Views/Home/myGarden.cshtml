@@ -16,11 +16,17 @@
         </div>
         <div class="row">
             <div class="col col-sm-6 col-md-6">
-                <div class="justify-center align-items-center">
+                <div class="justify-center align-items-center" id="something">
                     <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
                     <button class="btn btn-sm btn-danger mt-2" id="btnpumpoff">Turn Pump Off</button>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Check to manually trigger the water pump.
+                        </label>
+                    </div>
                 </div>
-                <div class="input-group mb-3 mt-2">
+                <div class="input-group mb-3 mt-2" id="divPreferedLevelInput">
                     <input type="text" class="form-control" id="preferedLevelInput" placeholder="Preferred Moisture Level" aria-label="Preferred Moisture Level" aria-describedby="button-addon2" aria-valuetext="@ViewBag.preferredMoistureLevel">
                     <button class="btn btn-primary" type="button" id="udpatePreferedMoistureLevel">Update</button>
                 </div>
@@ -29,63 +35,6 @@
         </div>
     </div>
 </div>
-
-<strong><hr /></strong>
-
-<div class="card bg-warning rounded">
-    <h5 class="mt-2 text-center">Garden 2: Soil Moisture Level</h5>
-    <div class="container ml-2">
-        <div class="row">
-            <div class="col col-sm-6 col-md-6 col-lg-11">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-sm-6 col-md-6">
-                <div class="justify-center align-items-center">
-                    <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
-                    <button class="btn btn-sm btn-danger mt-2" id="btnpumpoff">Turn Pump Off</button>
-                </div>
-                <div class="input-group mb-3 mt-2">
-                    <input type="text" class="form-control" id="preferedLevelInput" placeholder="Preferred Moisture Level" aria-label="Preferred Moisture Level" aria-describedby="button-addon2" aria-valuetext="@ViewBag.preferredMoistureLevel">
-                    <button class="btn btn-primary" type="button" id="udpatePreferedMoistureLevel">Update</button>
-                </div>
-            </div>
-            <div class="col col-sm-6 col-md-6"></div>
-        </div>
-    </div>
-</div>
-
-<strong><hr /></strong>
-
-<div class="card bg-warning rounded">
-    <h5 class="mt-2 text-center">Garden 3: Soil Moisture Level</h5>
-    <div class="container ml-2">
-        <div class="row">
-            <div class="col col-sm-6 col-md-6 col-lg-11">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-sm-6 col-md-6">
-                <div class="justify-center align-items-center">
-                    <button class="btn btn-sm btn-success mt-2" id="btnpumpon">Turn Pump On</button>
-                    <button class="btn btn-sm btn-danger mt-2" id="btnpumpoff">Turn Pump Off</button>
-                </div>
-                <div class="input-group mb-3 mt-2">
-                    <input type="text" class="form-control" id="preferedLevelInput" placeholder="Preferred Moisture Level" aria-label="Preferred Moisture Level" aria-describedby="button-addon2" aria-valuetext="@ViewBag.preferredMoistureLevel">
-                    <button class="btn btn-primary" type="button" id="udpatePreferedMoistureLevel">Update</button>
-                </div>
-            </div>
-            <div class="col col-sm-6 col-md-6"></div>
-        </div>
-    </div>
-</div>
-
 
 
 <script type="text/javascript">
@@ -93,6 +42,8 @@
         
         (function mymain(){
             $(document).ready(function() {
+                $("button#btnpumpon").hide();
+                $("button#btnpumpoff").hide();
 
                 function updateprogressbar() {
                     var formData = {gardenid:1};
@@ -114,6 +65,48 @@
                 window.setInterval(updateprogressbar, 2000);
             });
         })();
+
+        $(':checkbox').change(function () {
+            var model = {
+                gardenid: 1,
+                manualTrigger: 0
+            };
+            if(this.checked){
+                $("button#btnpumpon").show();
+                $("button#btnpumpoff").show();
+
+                model.manualTrigger = 1;
+
+                $.ajax({
+                    url: "postManualTriger",
+                    type: "POST",
+                    data: model,
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
+                });
+            }else{ 
+                $("button#btnpumpon").hide();
+                $("button#btnpumpoff").hide();
+
+                model.manualTrigger = 0;
+
+                $.ajax({
+                    url: "postManualTriger",
+                    type: "POST",
+                    data: model,
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
         
         $("#btnpumpon").on('click', function(){
             var model = 
@@ -127,10 +120,19 @@
                 data: model,
                 success: function (response) {
                     //alert(response);
+                    swal({
+                        title: "Success!",
+                        text: "Pump Turned On.",
+                        icon: "success",
+                    });
                     console.log("Pump Turned On");
                 },
                 error: function (request, status, error) {
                    // alert(request.responseText);
+                    swal({
+                        title: "Error Occured!",
+                        icon: "error",
+                    });
                    console.log("Eror Occured");
                 }
             });
@@ -148,10 +150,19 @@
                 data: model,
                 success: function (response) {
                     //alert(response);
-                    console.log("Pump Turned On");
+                    swal({
+                        title: "Success!",
+                        text: "Pump Turned Off.",
+                        icon: "success",
+                    });
+                    console.log("Pump Turned Off");
                 },
                 error: function (request, status, error) {
                    // alert(request.responseText);
+                    swal({
+                        title: "Error Occured!",
+                        icon: "error",
+                    });
                    console.log("Eror Occured");
                 }
             });
@@ -161,9 +172,13 @@
             var newLevel = $("#preferedLevelInput").val();
             console.log(newLevel);
 
-            if((newLevel <= 0 || newLevel > 100))
+            if((newLevel <= 0 || newLevel > 100) || isNaN(newLevel))
             {
-                alert("Enter Value between 0 - 100")
+                swal({
+                    title: "Whoops!",
+                    text: "Enter Value between 0 - 100.",
+                    icon: "warning",
+                });
             }else
             {
                 var model =
@@ -178,10 +193,19 @@
                     dataType: "json",
                     success: function (response) {
                         //alert(response);
+                        swal({
+                            title: "Success!",
+                            text: "Preferred moisture level updated.",
+                            icon: "success",
+                        });
                         console.log("Updated moisture level");
                     },
                     error: function (request, status, error) {
                         // alert(request.responseText);
+                        swal({
+                            title: "Error Occured!",
+                            icon: "error",
+                        });
                         console.log("Eror Occured");
                     }
                 });

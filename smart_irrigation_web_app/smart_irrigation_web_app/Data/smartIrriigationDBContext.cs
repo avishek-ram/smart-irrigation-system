@@ -133,6 +133,15 @@ namespace smart_irrigation_web_app.Data
                 entity.ToTable("tbl_garden");
             });
 
+            modelBuilder.Entity<tbl_garden>().HasData(new tbl_garden
+            {
+                id = 1, 
+                last_moisture_level = 0,
+                pump_trigger_status = null,
+                force_toggle_pump = null,
+                ManualTrigger = null,
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 

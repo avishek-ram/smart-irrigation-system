@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace smart_irrigation_web_app.Migrations
 {
-    public partial class newmig : Migration
+    public partial class Updatingmodel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,23 @@ namespace smart_irrigation_web_app.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbl_garden",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    last_moisture_level = table.Column<int>(type: "int", nullable: true),
+                    pump_trigger_status = table.Column<bool>(type: "bit", nullable: true),
+                    prefered_moisture_level = table.Column<int>(type: "int", nullable: true),
+                    force_toggle_pump = table.Column<bool>(type: "bit", nullable: true),
+                    ManualTrigger = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_garden", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -164,7 +181,7 @@ namespace smart_irrigation_web_app.Migrations
                 table: "AspNetRoles",
                 column: "NormalizedName",
                 unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                filter: "([NormalizedName] IS NOT NULL)");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -191,7 +208,7 @@ namespace smart_irrigation_web_app.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                filter: "([NormalizedUserName] IS NOT NULL)");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -210,6 +227,9 @@ namespace smart_irrigation_web_app.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "tbl_garden");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
